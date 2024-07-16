@@ -1,22 +1,32 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
+import App from './App'
 
 import { createBrowserRouter, RouterProvider, RouterProviderProps } from 'react-router-dom'
 
-import FileReaderComp from './Api/FileReaderComponents'
 import ErrorPage from './routers/ErrorPage'
 import Home from './routers/Home'
+import Analytics from "./routers/Analytics"
+import Translate from './routers/Translate'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <App />,
     errorElement: <ErrorPage />,
     children: [
       {
+        path: "/",
+        element: <Home />
+      },
+      {
         path: "admin/translate",
-        element: <FileReaderComp />
+        element: <Translate/>
+      },
+      {
+        path: "admin/analytics",
+        element: <Analytics />
       }
     ]
   }

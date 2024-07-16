@@ -1,0 +1,99 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card-wrapper {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.card {
+    border-radius: 25px;
+    background-color: #FFF;
+    margin: 10px;
+    flex: 1;
+    max-width: 200px;
+    padding: 10px;
+}
+
+.image-content, .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 14px;
+}
+
+.image-content {
+    position: relative;
+    row-gap: 5px;
+}
+
+.overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 25px 25px 0 25px;
+    background-color: #feba5a;
+}
+
+.overlay::before,
+.overlay::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -20px;
+    height: 20px;
+    width: 20px;
+    background-color: #feba5a;
+}
+
+.overlay::after {
+    border-radius: 0 25px 0 0;
+    background-color: #FFF;
+}
+
+.card-image {
+    position: relative;
+    height: 120px;
+    border-radius: 50%;
+    background: #FFF;
+    padding: 3px;
+}
+
+.card-image .card-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid black;
+}
+
+.card-content {
+    width: 170px;
+}
+
+.card-content button {
+    height: 30px;
+    width: 70px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #feba5a;
+    color: black;
+}
+
+.card-content button a {
+    text-decoration: none;
+    color: black;
+}

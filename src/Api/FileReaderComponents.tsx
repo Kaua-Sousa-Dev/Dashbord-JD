@@ -1,8 +1,25 @@
 import { useState } from "react";
 import * as XLSX from "xlsx";
 import { Iaddinf } from "../interfaces/columnsXML";
-import exemplo_De_Planilha from "../../public/Exemplo_De_Planilha-png.png";
+import exemplo_De_Planilha from "/Exemplo_De_Planilha-png.png";
 import ReactPaginate from "react-paginate";
+import "../css/FormLabel.css"
+
+import Container from "../components/Body/Container";
+import Title from "../components/Title/Title";
+import P from "../components/Title/Paragraph";
+import ContainerTable from "../components/Body/ContainerTable";
+import ListPrinc from "../components/Form/ListPrinc";
+import Thead from "../components/Form/Thead";
+import Tr from "../components/Form/Tr";
+import Th from "../components/Form/Th";
+import Tbody from "../components/Form/Tbody";
+import Ex_pl from "../components/image/Ex_Pl";
+import Td from "../components/Form/Td";
+import Userdiv from "../components/userPrinc";
+import FilterItem from "../components/Filter-item";
+import Pagination from "../components/Body/Pagination";
+import Button from "../components/Button";
 
 function FileReaderComp() {
   const [data, setData] = useState<Iaddinf[]>([]);
@@ -71,7 +88,9 @@ function FileReaderComp() {
     });
   };
 
-  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleFilterChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFilterCriteria((prevCriteria) => ({
       ...prevCriteria,
@@ -84,14 +103,15 @@ function FileReaderComp() {
       const matchesCriteria = Object.entries(filterCriteria).every(
         ([key, value]) => {
           if (key === "Interesse") {
-            const filtersArray = value.split(/,|\s/)
-            const userKey = (user[key as keyof Iaddinf])
+            const filtersArray = value.split(/,|\s/);
+            const userKey = user[key as keyof Iaddinf];
             const firstMatch = filtersArray.find((filter) => {
-              return userKey?.toString()?.toLowerCase()?.includes(
-                filter?.toString()?.toLowerCase()
-              )
-            })
-            return firstMatch != null
+              return userKey
+                ?.toString()
+                ?.toLowerCase()
+                ?.includes(filter?.toString()?.toLowerCase());
+            });
+            return firstMatch != null;
           }
           if (value) {
             return (user[key as keyof Iaddinf] || "")
@@ -135,233 +155,242 @@ function FileReaderComp() {
 
   return (
     <>
-      <div className="container">
-        <div className="centerContainer">
-          <h1 className="title">Tradutor de Dados: </h1>
-          <p>Escolha um arquivo .xls ou .xlsx</p>
-          <p>
-            Atenção: baseie seu arquivo com a imagem abaixo!, <br /> atentando-se ao uso
-            de caracteres especiais
-          </p>
+      <Container>
+        <Title>Tradutor de Dados: </Title>
+        <P>Escolha um arquivo .xls ou .xlsx</P>
+        <P>
+          Atenção: baseie seu arquivo com a imagem abaixo!, <br /> atentando-se
+          ao uso de caracteres especiais
+        </P>
 
-          <form>
+        <form className="ButtonInput">
           <label htmlFor="arquivo">
             <span>Selecione um arquivo</span>
-          <input
-            type="file"
-            accept=".xlsx, .xls"
-            onChange={handleFile}
-            className="upload_file"
-            id="arquivo"
-          />
-          </label>
-          </form>
-          
-          <img
-            src={exemplo_De_Planilha}
-            alt="Exemplo de Planilha"
-            className="ex_pl"
-          />
-        </div>
-      </div>
-
-      {
-        data.length > 0 && (
-          <div className="container_data">
-            <h3 className="centerContainer">Dados da Planilha:</h3>
-            <div className="table-container">
-              <table className="list_princ">
-                <thead>
-                  <tr>
-                    <th>Nome & Nome Social</th>
-                    <th>CPF</th>
-                    <th>Gênero</th>
-                    <th>Nascimento</th>
-                    <th>Nacionalidade</th>
-                    <th>DDD & Telefone</th>
-                    <th>Email</th>
-                    <th>Nome da Mãe</th>
-                    <th>Informações de endereço</th>
-                    <th>Ocupação</th>
-                    <th>Interesse</th>
-                    <th>Escolaridade</th>
-                    <th>Escola Pública</th>
-                    <th>Renda</th>
-                    <th>Deficiência</th>
-                    <th>Filhos</th>
-                    <th>Código Juventude Digital</th>
-                    <th>Raça</th>
-                    <th>Matrícula & Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {currentDataOriginal.map((user, index) => (
-                    <tr key={index} className="princ_user">
-                      <td>
-                        {user.Nome} - {user.NomeSocial}
-                      </td>
-                      <td>{user.Cpf}</td>
-                      <td>{user.Genero}</td>
-                      <td>{user.Nascimento}</td>
-                      <td>{user.Nacionalidade}</td>
-                      <td>
-                        {user.DDD} - {user.Telefone}
-                      </td>
-                      <td>{user.Email}</td>
-                      <td>{user.Mae}</td>
-                      <td>
-                        {user.Cidade} - {user.Bairro} - {user.Endereco} -{" "}
-                        {user.Numero} - {user.Complemento} - {user.Cep}
-                      </td>
-                      <td>{user.Ocupacao}</td>
-                      <td>{user.Interesse.replaceAll(",", ", ")}</td>
-                      <td>{user.Escolaridade}</td>
-                      <td>{user.Publica}</td>
-                      <td>{user.Renda}</td>
-                      <td>{user.Deficiencia}</td>
-                      <td>{user.Filhos}</td>
-                      <td>{user.CodJuv}</td>
-                      <td>{user.Raca}</td>
-                      <td>
-                        {user.Matricula} - {user.Status}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <ReactPaginate
-              previousLabel={"Anterior"}
-              nextLabel={"Próximo"}
-              pageCount={pageCountOriginal}
-              onPageChange={handlePageClickOriginal}
-              containerClassName={"pagination"}
-              activeClassName={"active"}
+            <input
+              type="file"
+              accept=".xlsx, .xls"
+              onChange={handleFile}
+              className="upload_file"
+              id="arquivo"
             />
-          </div>
-        )
-      }
+          </label>
+        </form>
 
-      {
-        data.length > 0 && (
-          <div className="contentContainer">
-            <h3>Filtragem:</h3>
-            <div className="userDad">
-              {Object.keys(filterCriteria).map((key) => (
-                <div key={key} className="filter-item">
-                  <label>{key}: </label>
-                  {
-                    ["Renda", "Deficiencia", "Genero", "Escolaridade", "Publica", "Filhos", "Status"].includes(key)
-                      ? (
-                        <select 
-                          name={key}
-                          onChange={handleFilterChange}
-                        >
-                          {Array.from(new Set(data.map((user) => user[key as keyof Iaddinf]).sort())).map(option => (
-                            <option 
-                              key={option} 
-                              value={option} 
-                              selected={filterCriteria[key as keyof typeof filterCriteria] == option}
-                            >{option}</option>
-                          ))}
-                        </select>
+        <Ex_pl src={exemplo_De_Planilha} alt="Exemplo de Planilha" />
+      </Container>
+
+      {data.length > 0 && (
+        <Container>
+          <Title>Dados da Planilha:</Title>
+          <ContainerTable>
+            <ListPrinc>
+              <Thead>
+                <Tr>
+                  <Th>Nome & Nome Social</Th>
+                  <Th>CPF</Th>
+                  <Th>Gênero</Th>
+                  <Th>Nascimento</Th>
+                  <Th>Nacionalidade</Th>
+                  <Th>DDD & Telefone</Th>
+                  <Th>Email</Th>
+                  <Th>Nome da Mãe</Th>
+                  <Th>Informações de endereço</Th>
+                  <Th>Ocupação</Th>
+                  <Th>Interesse</Th>
+                  <Th>Escolaridade</Th>
+                  <Th>Escola Pública</Th>
+                  <Th>Renda</Th>
+                  <Th>Deficiência</Th>
+                  <Th>Filhos</Th>
+                  <Th>Código Juventude Digital</Th>
+                  <Th>Raça</Th>
+                  <Th>Matrícula & Status</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {currentDataOriginal.map((user, index) => (
+                  <Tr key={index}>
+                    <Td>
+                      {user.Nome} - {user.NomeSocial}
+                    </Td>
+                    <Td>{user.Cpf}</Td>
+                    <Td>{user.Genero}</Td>
+                    <Td>{user.Nascimento}</Td>
+                    <Td>{user.Nacionalidade}</Td>
+                    <Td>
+                      {user.DDD} - {user.Telefone}
+                    </Td>
+                    <Td>{user.Email}</Td>
+                    <Td>{user.Mae}</Td>
+                    <Td>
+                      {user.Cidade} - {user.Bairro} - {user.Endereco} -{" "}
+                      {user.Numero} - {user.Complemento} - {user.Cep}
+                    </Td>
+                    <Td>{user.Ocupacao}</Td>
+                    <Td>{user.Interesse.replaceAll(",", ", ")}</Td>
+                    <Td>{user.Escolaridade}</Td>
+                    <Td>{user.Publica}</Td>
+                    <Td>{user.Renda}</Td>
+                    <Td>{user.Deficiencia}</Td>
+                    <Td>{user.Filhos}</Td>
+                    <Td>{user.CodJuv}</Td>
+                    <Td>{user.Raca}</Td>
+                    <Td>
+                      {user.Matricula} - {user.Status}
+                    </Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </ListPrinc>
+          </ContainerTable>
+          <ReactPaginate
+            previousLabel={"Anterior"}
+            nextLabel={"Próximo"}
+            pageCount={pageCountOriginal}
+            onPageChange={handlePageClickOriginal}
+            containerClassName={"pagination"}
+            activeClassName={"active"}
+          />
+        </Container>
+      )}
+
+      {data.length > 0 && (
+        <Container>
+          <Title>Filtragem:</Title>
+          <Userdiv>
+            {Object.keys(filterCriteria).map((key) => (
+              <FilterItem key={key}>
+                <label>{key}: </label>
+                {[
+                  "Renda",
+                  "Deficiencia",
+                  "Genero",
+                  "Escolaridade",
+                  "Publica",
+                  "Filhos",
+                  "Status",
+                ].includes(key) ? (
+                  <select name={key} onChange={handleFilterChange}>
+                    {Array.from(
+                      new Set(
+                        data.map((user) => user[key as keyof Iaddinf]).sort()
                       )
-                      : (
-                        <input
-                          type="text"
-                          name={key}
-                          value={filterCriteria[key as keyof typeof filterCriteria] || ""}
-                          onChange={handleFilterChange}
-                        />
-                      )
-                  }
-                </div>
-              ))}
-            </div>
-            <button onClick={applyFilter}>Aplicar Filtro</button>
-          </div>
-        )
-      }
+                    ).map((option) => (
+                      <option
+                        key={option}
+                        value={option}
+                        selected={
+                          filterCriteria[key as keyof typeof filterCriteria] ==
+                          option
+                        }
+                      >
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <input
+                    type="text"
+                    name={key}
+                    value={
+                      filterCriteria[key as keyof typeof filterCriteria] || ""
+                    }
+                    onChange={handleFilterChange}
+                  />
+                )}
+              </FilterItem>
+            ))}
+          </Userdiv>
+          <Button onClick={applyFilter}>Aplicar Filtro</Button>
+        </Container>
+      )}
 
       {isFiltered && (
-        <div className="container_data">
-          <h3 className="centerContainer">Dados Filtrados:</h3>
-          <div className="table-container">
-            <table className="list_princ">
-              <thead>
-                <tr>
-                  <th>Nome & Nome Social</th>
-                  {filterCriteria.Cpf && <th>CPF</th>}
-                  {filterCriteria.Genero && <th>Gênero</th>}
-                  {filterCriteria.Nascimento && <th>Nascimento</th>}
-                  {filterCriteria.Nacionalidade && <th>Nacionalidade</th>}
-                  {filterCriteria.DDD && <th>DDD & Telefone</th>}
-                  {filterCriteria.Email && <th>Email</th>}
-                  {filterCriteria.Mae && <th>Nome da Mãe</th>}
+        <>
+          <Container>
+            <Title>Dados Filtrados:</Title>
+          </Container>
+          <ContainerTable>
+            <ListPrinc>
+              <Thead>
+                <Tr>
+                  <Th>Nome & Nome Social</Th>
+                  {filterCriteria.Cpf && <Th>CPF</Th>}
+                  {filterCriteria.Genero && <Th>Gênero</Th>}
+                  {filterCriteria.Nascimento && <Th>Nascimento</Th>}
+                  {filterCriteria.Nacionalidade && <Th>Nacionalidade</Th>}
+                  {filterCriteria.DDD && <Th>DDD & Telefone</Th>}
+                  {filterCriteria.Email && <Th>Email</Th>}
+                  {filterCriteria.Mae && <Th>Nome da Mãe</Th>}
                   {(filterCriteria.Cidade ||
                     filterCriteria.Bairro ||
                     filterCriteria.Endereco ||
                     filterCriteria.Numero ||
                     filterCriteria.Complemento ||
-                    filterCriteria.Cep) && <th>Informações de endereço</th>}
-                  {filterCriteria.Ocupacao && <th>Ocupação</th>}
-                  {filterCriteria.Interesse && <th>Interesse</th>}
-                  {filterCriteria.Escolaridade && (<th>Escolaridade</th>)}
-                  {filterCriteria.Publica && (<th>Escola pública?</th>)}
-                  {filterCriteria.Renda && <th>Renda</th>}
-                  {filterCriteria.Deficiencia && <th>Deficiência</th>}
-                  {filterCriteria.Filhos && <th>Filhos</th>}
-                  {filterCriteria.CodJuv && <th>Código Juventude Digital</th>}
-                  {filterCriteria.Raca && <th>Raça</th>}
-                  {filterCriteria.Status && <th>Matrícula & Status</th>}
-                </tr>
-              </thead>
-              <tbody>
+                    filterCriteria.Cep) && <Th>Informações de endereço</Th>}
+                  {filterCriteria.Ocupacao && <Th>Ocupação</Th>}
+                  {filterCriteria.Interesse && <Th>Interesse</Th>}
+                  {filterCriteria.Escolaridade && <Th>Escolaridade</Th>}
+                  {filterCriteria.Publica && <Th>Escola pública?</Th>}
+                  {filterCriteria.Renda && <Th>Renda</Th>}
+                  {filterCriteria.Deficiencia && <Th>Deficiência</Th>}
+                  {filterCriteria.Filhos && <Th>Filhos</Th>}
+                  {filterCriteria.CodJuv && <Th>Código Juventude Digital</Th>}
+                  {filterCriteria.Raca && <Th>Raça</Th>}
+                  {filterCriteria.Status && <Th>Matrícula & Status</Th>}
+                </Tr>
+              </Thead>
+              <Tbody>
                 {currentDataFiltered.map((user, index) => (
-                  <tr key={index} className="princ_user">
-                    <td>
+                  <Tr key={index}>
+                    <Td>
                       {user.Nome} - {user.NomeSocial}
-                    </td>
-                    {filterCriteria.Cpf && <td>{user.Cpf}</td>}
-                    {filterCriteria.Genero && <td>{user.Genero}</td>}
-                    {filterCriteria.Nascimento && <td>{user.Nascimento}</td>}
+                    </Td>
+                    {filterCriteria.Cpf && <Td>{user.Cpf}</Td>}
+                    {filterCriteria.Genero && <Td>{user.Genero}</Td>}
+                    {filterCriteria.Nascimento && <Td>{user.Nascimento}</Td>}
                     {filterCriteria.Nacionalidade && (
-                      <td>{user.Nacionalidade}</td>
+                      <Td>{user.Nacionalidade}</Td>
                     )}
-                    {filterCriteria.DDD && <td>{user.DDD}</td>}
-                    {filterCriteria.Email && <td>{user.Email}</td>}
-                    {filterCriteria.Mae && <td>{user.Mae}</td>}
+                    {filterCriteria.DDD && <Td>{user.DDD}</Td>}
+                    {filterCriteria.Email && <Td>{user.Email}</Td>}
+                    {filterCriteria.Mae && <Td>{user.Mae}</Td>}
                     {(filterCriteria.Cidade ||
                       filterCriteria.Bairro ||
                       filterCriteria.Endereco ||
                       filterCriteria.Numero ||
                       filterCriteria.Complemento ||
                       filterCriteria.Cep) && (
-                      <td>
+                      <Td>
                         {user.Endereco}, {user.Numero}, {user.Complemento},{" "}
                         {user.Bairro}, {user.Cidade} - {user.Cep}
-                      </td>
+                      </Td>
                     )}
-                    {filterCriteria.Ocupacao && <td>{user.Ocupacao}</td>}
-                    {filterCriteria.Interesse && <td>{user.Interesse.replaceAll(",", ", ")}</td>}
-                    {filterCriteria.Escolaridade && <td>{user.Escolaridade}</td>}
-                    {filterCriteria.Publica && <td>{user.Publica}</td>}
-                    {filterCriteria.Renda && <td>{user.Renda}</td>}
-                    {filterCriteria.Deficiencia && <td>{user.Deficiencia}</td>}
-                    {filterCriteria.Filhos && <td>{user.Filhos}</td>}
-                    {filterCriteria.CodJuv && <td>{user.CodJuv}</td>}
-                    {filterCriteria.Raca && <td>{user.Raca}</td>}
+                    {filterCriteria.Ocupacao && <Td>{user.Ocupacao}</Td>}
+                    {filterCriteria.Interesse && (
+                      <Td>{user.Interesse.replaceAll(",", ", ")}</Td>
+                    )}
+                    {filterCriteria.Escolaridade && (
+                      <Td>{user.Escolaridade}</Td>
+                    )}
+                    {filterCriteria.Publica && <Td>{user.Publica}</Td>}
+                    {filterCriteria.Renda && <Td>{user.Renda}</Td>}
+                    {filterCriteria.Deficiencia && <Td>{user.Deficiencia}</Td>}
+                    {filterCriteria.Filhos && <Td>{user.Filhos}</Td>}
+                    {filterCriteria.CodJuv && <Td>{user.CodJuv}</Td>}
+                    {filterCriteria.Raca && <Td>{user.Raca}</Td>}
                     {filterCriteria.Status && (
-                      <td>
+                      <Td>
                         {user.Matricula} - {user.Status}
-                      </td>
+                      </Td>
                     )}
-                  </tr>
+                  </Tr>
                 ))}
-              </tbody>
-            </table>
-            {pageCountFiltered > 1 && (
-              <div className="pagination-container">
+              </Tbody>
+            </ListPrinc>
+          </ContainerTable>
+          {pageCountFiltered > 1 && (
+              <Pagination>
                 <ReactPaginate
                   previousLabel={"Anterior"}
                   nextLabel={"Próximo"}
@@ -370,10 +399,9 @@ function FileReaderComp() {
                   containerClassName={"pagination"}
                   activeClassName={"active"}
                 />
-              </div>
+              </Pagination>
             )}
-          </div>
-        </div>
+        </>
       )}
     </>
   );

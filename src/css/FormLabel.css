@@ -1,0 +1,47 @@
+.ButtonInput {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 250px;
+}
+
+.ButtonInput label {
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: #eaedf0;
+    color: black;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.ButtonInput input[type="file"] {
+    display: none;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    list-style: none;
+    padding: 0;
+}
+.pagination li {
+    margin: 0 5px;
+}
+.pagination li a {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    color: #feba5a;
+    cursor: pointer;
+    text-decoration: none;
+}
+.pagination li a:hover {
+    background-color: #ddd;
+}
+.pagination li.active a {
+    background-color: #feba5a;
+    color: white;
+    border-color: #feba5a;
+}
