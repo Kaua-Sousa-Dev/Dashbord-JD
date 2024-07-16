@@ -1,7 +1,10 @@
+import error404 from "/Error404.jpg"
+import "../css/error404.css"
+
 const ErrorPage = () =>{
     return(
     <div>
-        <p>Error 404</p>
+        <img src={error404} alt="Error404" className="error404"/>
     </div>
     )
 }

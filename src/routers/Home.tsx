@@ -1,9 +1,13 @@
-const Home = () =>{
-    return (
-        <>
-        <p>Home</p>
-        </>
-    )
-}
+import Main from "../components/Body/Main";
 
-export default Home
+const Home = () => {
+  return (
+    <>
+      <Main>
+        <p>Home</p>
+      </Main>
+    </>
+  );
+};
+
+export default Home;
