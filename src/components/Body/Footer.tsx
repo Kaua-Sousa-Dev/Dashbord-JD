@@ -2,7 +2,9 @@ import styled from "styled-components";
 import P from "../Title/Paragraph";
 import logoCTN from "/logo-citinovaBlack.png";
 import logoPF from "/Logo_Pref-fonte-branca.png";
-import profile1 from "/naruto.jfif"
+import profile1 from "/profile1.jfif"
+import profile2 from "/profile2.jfif"
+import profile3 from "/naruto.jfif"
 import "../../css/cardFooter.css"
 
 const Footer = styled.footer`
@@ -37,7 +39,7 @@ export default function StylesFooter() {
                   <p className="name-content">Kauã Sousa Lima</p>
                   <p className="desc-content">Desenvolvedor</p>
                   <button>
-                    <a href="https://github.com/Kaua-Sousa-Dev" target="_blank">
+                    <a href="https://www.linkedin.com/in/kaua-sousa-dev?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">
                       Ver mais
                     </a>
                   </button>
@@ -49,8 +51,8 @@ export default function StylesFooter() {
                   <span className="overlay"></span>
                   <div className="card-image">
                     <img
-                      src={profile1}
-                      alt="Kauã Sousa Lima"
+                      src={profile3}
+                      alt="João Pedro Batista"
                       className="card-img"
                     />
                   </div>
@@ -71,8 +73,8 @@ export default function StylesFooter() {
                   <span className="overlay"></span>
                   <div className="card-image">
                     <img
-                      src={profile1}
-                      alt="Kauã Sousa Lima"
+                      src={profile2}
+                      alt="Ana Patrícia"
                       className="card-img"
                     />
                   </div>
@@ -81,7 +83,7 @@ export default function StylesFooter() {
                   <p className="name-content">Ana Patrícia</p>
                   <p className="desc-content">Looker Dev</p>
                   <button>
-                    <a href="https://github.com/Kaua-Sousa-Dev" target="_blank">
+                    <a href="https://www.instagram.com/ana_patricia710/" target="_blank">
                       Ver mais
                     </a>
                   </button>
