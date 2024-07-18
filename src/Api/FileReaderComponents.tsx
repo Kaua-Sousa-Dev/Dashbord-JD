@@ -4,6 +4,8 @@ import { Iaddinf } from "../interfaces/columnsXML";
 import exemplo_De_Planilha from "/Exemplo_De_Planilha-png.png";
 import ReactPaginate from "react-paginate";
 import "../css/FormLabel.css"
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css'
 
 import Container from "../components/Body/Container";
 import Title from "../components/Title/Title";
@@ -55,9 +57,19 @@ function FileReaderComp() {
   const [pageNumberOriginal, setPageNumberOriginal] = useState(0);
   const [pageNumberFiltered, setPageNumberFiltered] = useState(0);
 
+  const MAX_FILE_SIZE = 512 * 1024;
+
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+
+      if(file.size > MAX_FILE_SIZE){
+        toast.error("O arquivo é muito grande. O tamanho máximo permitido é 512KB.");
+        return;
+      }
+
+      const FileType = file.name.split(".").pop()?.toLowerCase();
+      if (FileType === "xls" || FileType === "xlsx") {
       const reader = new FileReader();
       reader.onload = (evt) => {
         if (evt.target) {
@@ -72,10 +84,13 @@ function FileReaderComp() {
           const mappedData = mapData(data);
           setData(mappedData);
           setFilteredData(mappedData);
+          toast.success("Arquivo carregado com sucesso!")
         }
       };
       reader.readAsArrayBuffer(file);
-    }
+    } else {
+      toast.error("Selecione um arquivo .xls ou .xlsx!")
+    }} 
   };
 
   const mapData = (data: any[][]): Iaddinf[] => {
@@ -124,9 +139,22 @@ function FileReaderComp() {
       );
       return matchesCriteria;
     });
+
+    if (filtered.length === 0) {
+      toast.error("Nenhum resultado encontrado com os critérios fornecidos.");
+    } else {
+
     setFilteredData(filtered);
     setPageNumberFiltered(0);
     setIsFiltered(true);
+    toast.info("Filtro aplicado!");
+    }
+  };
+
+  const handleKeyDown = (event:any) => {
+    if (event.key === 'Enter') {
+      applyFilter();
+    }
   };
 
   const handlePageClickOriginal = ({ selected }: { selected: number }) => {
@@ -270,7 +298,7 @@ function FileReaderComp() {
                   "Filhos",
                   "Status",
                 ].includes(key) ? (
-                  <select name={key} onChange={handleFilterChange}>
+                  <select name={key} onChange={handleFilterChange} onKeyDown={handleKeyDown}>
                     {Array.from(
                       new Set(
                         data.map((user) => user[key as keyof Iaddinf]).sort()
@@ -296,6 +324,7 @@ function FileReaderComp() {
                       filterCriteria[key as keyof typeof filterCriteria] || ""
                     }
                     onChange={handleFilterChange}
+                    onKeyDown={handleKeyDown}
                   />
                 )}
               </FilterItem>
@@ -403,6 +432,8 @@ function FileReaderComp() {
             )}
         </>
       )}
+
+      <ToastContainer />
     </>
   );
 }
