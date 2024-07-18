@@ -2,8 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
+import { createBrowserRouter, RouterProvider} from 'react-router-dom'
 
-import { createBrowserRouter, RouterProvider, RouterProviderProps } from 'react-router-dom'
 
 import ErrorPage from './routers/ErrorPage'
 import Home from './routers/Home'
