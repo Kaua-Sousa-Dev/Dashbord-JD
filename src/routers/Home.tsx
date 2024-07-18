@@ -41,7 +41,7 @@ export default function stylesHome() {
     <Home>
       <Video>
         <RoundedReactPlayer url={translate} controls={true} height="400px" width="600px" volume={0}/>
-        <p>Site responsável pela tradução de arquivos .xml &#40;Planilhas&#41;</p>
+        <p>Site responsável pela tradução de arquivos .xls ou .xlsx &#40;Planilhas&#41;</p>
         <Button>
           <StyledLink to="admin/translate">Acessar</StyledLink>
         </Button>
