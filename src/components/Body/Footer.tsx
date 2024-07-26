@@ -1,15 +1,17 @@
+// Importando Arquivos
 import styled from "styled-components";
 import P from "../Title/Paragraph";
 import logoCTN from "/logo-citinovaBlack.png";
 import logoPF from "/Logo_Pref-fonte-branca.png";
 import profile1 from "/profile1.jfif"
 import profile2 from "/profile2.jfif"
-import profile3 from "/naruto.jfif"
+import profile3 from "/profile3.jfif"
 import "../../css/cardFooter.css"
 
+// Stytled Component Div-Footer
 const Footer = styled.footer`
     display: flex;
-    background-color: #4f3887;
+    background-color: #00A195;
     margin-top: 20px;
     padding: 20px;
     display: flex;
@@ -17,6 +19,7 @@ const Footer = styled.footer`
     align-items: center;
 `;
 
+// Função Retornando Footer Customizado
 export default function StylesFooter() {
   return (
     <>
@@ -37,7 +40,7 @@ export default function StylesFooter() {
                 </div>
                 <div className="card-content">
                   <p className="name-content">Kauã Sousa Lima</p>
-                  <p className="desc-content">Desenvolvedor</p>
+                  <p className="desc-content">Dev Fullstack</p>
                   <button>
                     <a href="https://www.linkedin.com/in/kaua-sousa-dev?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank">
                       Ver mais
@@ -59,9 +62,9 @@ export default function StylesFooter() {
                 </div>
                 <div className="card-content">
                   <p className="name-content">João Pedro</p>
-                  <p className="desc-content">Desenvolvedor</p>
+                  <p className="desc-content">Dev Fullstack</p>
                   <button>
-                    <a href="https://github.com/Kaua-Sousa-Dev" target="_blank">
+                    <a href="https://www.instagram.com/peddrobatista/" target="_blank">
                       Ver mais
                     </a>
                   </button>

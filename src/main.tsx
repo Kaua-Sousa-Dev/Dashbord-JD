@@ -1,15 +1,16 @@
+// Importando arquivos
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App'
 import { createBrowserRouter, RouterProvider} from 'react-router-dom'
 
-
+// Importando Rotas
 import ErrorPage from './routers/ErrorPage'
 import Home from './routers/Home'
-import Analytics from "./routers/Analytics"
 import Translate from './routers/Translate'
 
+// Constante Rotas com React Router Dom
 const router = createBrowserRouter([
   {
     path: "/",
@@ -23,10 +24,6 @@ const router = createBrowserRouter([
       {
         path: "admin/translate",
         element: <Translate/>
-      },
-      {
-        path: "admin/analytics",
-        element: <Analytics />
       }
     ]
   }

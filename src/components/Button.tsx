@@ -1,5 +1,7 @@
+// Stytled Component
 import styled from "styled-components";
 
+// Stytled Component Button
 const Button = styled.button`
     height: 40px;
     width: 120px;

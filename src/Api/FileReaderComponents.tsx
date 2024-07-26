@@ -1,3 +1,4 @@
+// Importanto arquivos
 import { useState } from "react";
 import * as XLSX from "xlsx";
 import { Iaddinf } from "../interfaces/columnsXML";
@@ -7,6 +8,7 @@ import "../css/FormLabel.css"
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'
 
+// Importando components
 import Container from "../components/Body/Container";
 import Title from "../components/Title/Title";
 import P from "../components/Title/Paragraph";
@@ -23,7 +25,9 @@ import FilterItem from "../components/Filter-item";
 import Pagination from "../components/Body/Pagination";
 import Button from "../components/Button";
 
+// Função Reader XLS & Filtragem de dados
 function FileReaderComp() {
+  //Trabalhando com dados
   const [data, setData] = useState<Iaddinf[]>([]);
   const [filteredData, setFilteredData] = useState<Iaddinf[]>([]);
   const [filterCriteria, setFilterCriteria] = useState({
@@ -51,23 +55,27 @@ function FileReaderComp() {
     CodJuv: "",
     Raca: "",
     Status: "",
-  });
+  }); // Interface Colunas XLS
   const [isFiltered, setIsFiltered] = useState(false);
   const [usersPerPage] = useState(10);
   const [pageNumberOriginal, setPageNumberOriginal] = useState(0);
   const [pageNumberFiltered, setPageNumberFiltered] = useState(0);
 
+  // Definindo Tamanho do arquivo
   const MAX_FILE_SIZE = 512 * 1024;
 
+  // Constante de Leitura do arquivo e validações
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
 
+      // Validação
       if(file.size > MAX_FILE_SIZE){
         toast.error("O arquivo é muito grande. O tamanho máximo permitido é 512KB.");
         return;
       }
 
+      // Lendo arquivo
       const FileType = file.name.split(".").pop()?.toLowerCase();
       if (FileType === "xls" || FileType === "xlsx") {
       const reader = new FileReader();
@@ -113,6 +121,7 @@ function FileReaderComp() {
     }));
   };
 
+  // Constaste de filtragem
   const applyFilter = () => {
     const filtered = data.filter((user) => {
       const matchesCriteria = Object.entries(filterCriteria).every(
@@ -127,7 +136,7 @@ function FileReaderComp() {
                 ?.includes(filter?.toString()?.toLowerCase());
             });
             return firstMatch != null;
-          }
+          } // aplicando leitura otimizada de interesses
           if (value) {
             return (user[key as keyof Iaddinf] || "")
               .toString()
@@ -151,20 +160,24 @@ function FileReaderComp() {
     }
   };
 
+  // Constante de ativação ApplyFilter
   const handleKeyDown = (event:any) => {
     if (event.key === 'Enter') {
       applyFilter();
     }
   };
 
+  // React-Paginate (Primeira Lista)
   const handlePageClickOriginal = ({ selected }: { selected: number }) => {
     setPageNumberOriginal(selected);
   };
 
+  // React-Paginate (Segunda Lista)
   const handlePageClickFiltered = ({ selected }: { selected: number }) => {
     setPageNumberFiltered(selected);
   };
 
+  // Constantes React-Paginate Config
   const pagesVisitedOriginal = pageNumberOriginal * usersPerPage;
   const pagesVisitedFiltered = pageNumberFiltered * usersPerPage;
 
@@ -190,7 +203,8 @@ function FileReaderComp() {
           Atenção: baseie seu arquivo com a imagem abaixo!, <br /> atentando-se
           ao uso de caracteres especiais
         </P>
-
+        
+        {/* Input de seleção de arquivo */}
         <form className="ButtonInput">
           <label htmlFor="arquivo">
             <span>Selecione um arquivo</span>
@@ -202,15 +216,16 @@ function FileReaderComp() {
               id="arquivo"
             />
           </label>
-        </form>
+        </form> 
 
         <Ex_pl src={exemplo_De_Planilha} alt="Exemplo de Planilha" />
       </Container>
 
+      {/* Caso exista um arquivo compatível, após a leitura obtendo valores maiores que 0 irá ser adicionado a lista dos dados e opções de filtragens */}
       {data.length > 0 && (
         <Container>
           <Title>Dados da Planilha:</Title>
-          <ContainerTable>
+          <ContainerTable> {/* Primeira tabela de dados lidos */}
             <ListPrinc>
               <Thead>
                 <Tr>
@@ -271,6 +286,7 @@ function FileReaderComp() {
               </Tbody>
             </ListPrinc>
           </ContainerTable>
+          {/* React-Paginate Config */}
           <ReactPaginate
             previousLabel={"Anterior"}
             nextLabel={"Próximo"}
@@ -278,17 +294,19 @@ function FileReaderComp() {
             onPageChange={handlePageClickOriginal}
             containerClassName={"pagination"}
             activeClassName={"active"}
-          />
+          /> 
         </Container>
       )}
 
+      {/* Caso exista um arquivo compatível, após a leitura obtendo valores maiores que 0 irá ser adicionado a lista dos dados e opções de filtragens */}
       {data.length > 0 && (
         <Container>
           <Title>Filtragem:</Title>
           <Userdiv>
+            {/* Configurações de Filtragem */}
             {Object.keys(filterCriteria).map((key) => (
               <FilterItem key={key}>
-                <label>{key}: </label>
+                <label>{key}: </label> {/* Opção Select e Input text */}
                 {[
                   "Renda",
                   "Deficiencia",
@@ -325,21 +343,22 @@ function FileReaderComp() {
                     }
                     onChange={handleFilterChange}
                     onKeyDown={handleKeyDown}
-                  />
+                  /> 
                 )}
               </FilterItem>
             ))}
           </Userdiv>
-          <Button onClick={applyFilter}>Aplicar Filtro</Button>
+          <Button onClick={applyFilter}>Aplicar Filtro</Button> {/* Button Chamando constante ApplyFilter */}
         </Container>
       )}
 
+      {/* Caso a filtragem seja realizada com sucesso, irá retornar uma tabela dos dados filtrados */}
       {isFiltered && (
         <>
           <Container>
             <Title>Dados Filtrados:</Title>
           </Container>
-          <ContainerTable>
+          <ContainerTable> {/* Tabela dos dados Filtrados */}
             <ListPrinc>
               <Thead>
                 <Tr>
@@ -418,6 +437,8 @@ function FileReaderComp() {
               </Tbody>
             </ListPrinc>
           </ContainerTable>
+
+          {/* React-Paginate Config */}
           {pageCountFiltered > 1 && (
               <Pagination>
                 <ReactPaginate
@@ -432,10 +453,10 @@ function FileReaderComp() {
             )}
         </>
       )}
-
       <ToastContainer />
     </>
   );
 }
 
+// Exportar Função
 export default FileReaderComp;

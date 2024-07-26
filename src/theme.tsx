@@ -1,6 +1,8 @@
+// Temas 
 const theme = {
     colors: {
-        primary: "#4F3887",
+        primary: "##00A195",
+        second: "#3498db",
         white: "#FFF",
         black: "#000000"
     }

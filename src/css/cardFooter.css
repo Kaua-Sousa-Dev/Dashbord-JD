@@ -1,3 +1,4 @@
+ /* Card Profile */ 
 .profile-container {
     display: flex;
     justify-content: center;
@@ -44,7 +45,7 @@
     height: 100%;
     width: 100%;
     border-radius: 25px 25px 0 25px;
-    background-color: #feba5a;
+    background-color: #3498db;
 }
 
 .overlay::before,
@@ -55,7 +56,7 @@
     bottom: -20px;
     height: 20px;
     width: 20px;
-    background-color: #feba5a;
+    background-color: #3498db;
 }
 
 .overlay::after {
@@ -89,7 +90,7 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    background-color: #feba5a;
+    background-color: #3498db;
     color: black;
 }
 

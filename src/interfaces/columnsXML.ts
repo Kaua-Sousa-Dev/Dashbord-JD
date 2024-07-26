@@ -1,3 +1,5 @@
+// Interface Columns xls
+    // Interface informações de usuário
 export interface Iuser {
     Nome: string;
     NomeSocial?: string;
@@ -9,7 +11,8 @@ export interface Iuser {
     Telefone: string;
     Email: string;
 }
-  
+
+// Interface informações de endereço  
 export interface Iaddress extends Iuser {
     Mae: string;
     Cidade: string;
@@ -21,6 +24,7 @@ export interface Iaddress extends Iuser {
     Ocupacao: string;
 }
   
+// Interface informações adicionais
 export interface Iaddinf extends Iaddress {
     Interesse: string;
     Publica: string;

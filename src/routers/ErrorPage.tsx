@@ -1,6 +1,8 @@
+// importando arquivos
 import error404 from "/Error404.jpg"
 import "../css/error404.css"
 
+// Rota Error404
 const ErrorPage = () =>{
     return(
     <div>

@@ -1,3 +1,4 @@
+ /* Input Custom */ 
 .ButtonInput {
     display: block;
     margin: 0 auto;
@@ -20,6 +21,7 @@
     display: none;
 }
 
+ /* React-Paginate Custom */ 
 .pagination {
     display: flex;
     justify-content: center;
@@ -33,7 +35,7 @@
 .pagination li a {
     padding: 8px 12px;
     border: 1px solid #ddd;
-    color: #feba5a;
+    color: #3498db;
     cursor: pointer;
     text-decoration: none;
 }
@@ -41,7 +43,7 @@
     background-color: #ddd;
 }
 .pagination li.active a {
-    background-color: #feba5a;
+    background-color: #3498db;
     color: white;
-    border-color: #feba5a;
+    border-color: #3498db;
 }
