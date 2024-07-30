@@ -9,6 +9,7 @@ import { createBrowserRouter, RouterProvider} from 'react-router-dom'
 import ErrorPage from './routers/ErrorPage'
 import Home from './routers/Home'
 import Translate from './routers/Translate'
+import Ranking from './Api/Ranking'
 
 // Constante Rotas com React Router Dom
 const router = createBrowserRouter([
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "admin/translate",
         element: <Translate/>
+      },
+      {
+        path: "admin/ranking",
+        element: <Ranking/>
       }
     ]
   }
