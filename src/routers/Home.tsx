@@ -4,6 +4,7 @@ import ReactPlayer from "react-player";
 import translate from "/Tradutor-de-Arquivos.mp4"
 import analytics from "/Analytics-JD.mp4"
 import looker from "/Looker-JD.mp4"
+import ranking from "/Ranking.mp4"
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
 
@@ -38,6 +39,13 @@ const Video = styled.div`
 const RoundedReactPlayer = styled(ReactPlayer)`
   border-radius: 15px;
   overflow: hidden;
+  
+`
+
+// styled component title
+const Title = styled.h3`
+  text-align: center;
+  height: 5px;
 `
 
 // Função retornando Pagina home customizada
@@ -51,8 +59,9 @@ export default function stylesHome() {
       <p>Escolha uma das plataforma abaixo</p>
     </Home>
 
-    <Home> {/* Video de apresentação */}
+    <Home> 
       <Video>
+        <Title>Tradutor de dados</Title>
         <RoundedReactPlayer url={translate} controls={true} height="400px" width="600px" volume={0} loop={true}/>
         <p>Site responsável pela tradução de arquivos .xls ou .xlsx &#40;Planilhas&#41;</p>
         <Button>
@@ -60,21 +69,32 @@ export default function stylesHome() {
         </Button>
       </Video>
     
-      <Video> {/* Video de apresentação */}
-        <RoundedReactPlayer url={analytics} controls={true} height="400px" width="550px" volume={0} loop={true}/>
-        <p>Site responsável por fornecer gráficos ao ler arquivos .xml &#40;Planilhas&#41;</p>
+      <Video> 
+        <Title>Ranking</Title>
+        <RoundedReactPlayer url={ranking} controls={true} height="400px" width="600px" volume={0} loop={true}/>
+        <p>Site responsável por rankear alunos de acordo com seus interesses</p>
         <Button>
-          <StyledLink to="#">Acessar</StyledLink>
+          <StyledLink to="admin/ranking">Acessar</StyledLink>
         </Button>
       </Video>
     </Home>
 
     <Home>
-      <Video> {/* Video de apresentação */}
+      <Video>
+        <Title>Looker Studio</Title>
         <RoundedReactPlayer url={looker} controls={true} height="400px" width="600px" volume={0} loop={true}/>
         <p>Plataforma Looker Studio fornecendo os dados em formato de gráficos</p>
         <Button>
           <StyledLink to="https://lookerstudio.google.com/u/0/reporting/aa2d52b9-deea-4eea-9200-61f48a929d65/page/DAH2D" target="_blank">Acessar</StyledLink>
+        </Button>
+      </Video>
+
+      <Video> 
+        <Title>Estátisticas</Title>
+        <RoundedReactPlayer url={analytics} controls={true} height="400px" width="600px" volume={0} loop={true}/>
+        <p>Site responsável por fornecer gráficos ao inserir arquivos .xml &#40;Planilhas&#41;</p>
+        <Button>
+          <StyledLink to="#">Acessar</StyledLink>
         </Button>
       </Video>
     </Home>
