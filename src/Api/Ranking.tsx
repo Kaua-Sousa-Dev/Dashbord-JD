@@ -7,6 +7,7 @@ import ReactPaginate from "react-paginate";
 import "../css/FormLabel.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "../css/input.css";
 
 // Importando components
 import Container from "../components/Body/Container";
@@ -34,21 +35,21 @@ function Ranking() {
 
   // Mapeamento de palavras-chave para interesses
   const keywordMapping = [
-    { interest: "programação", keywords: ["java", "python", "c++", "php", "desenvolvedor", "dev", "desenvolvimento", "web", "mysql", "banco de dados", "frontend", "backend", "fullstack", "python", "android", "ios", "gestão de projetos", "mobile", "ruby", "swift", "c#", "go", "kotlin", "r", "sql", "html", "css", "typescript", "rust", "framework", "nosql", "algoritmo"] },
+    { interest: "programação", keywords: ["programação", "java", "python", "c++", "php", "desenvolvedor", "dev", "desenvolvimento", "web", "mysql", "banco de dados", "frontend", "backend", "fullstack", "python", "android", "ios", "gestão de projetos", "mobile", "ruby", "swift", "c#", "go", "kotlin", "r", "sql", "html", "css", "typescript", "rust", "framework", "nosql", "algoritmo"] },
 
-    { interest: "marketing", keywords: ["estratégia digital", "social media", "copywriter", "anúncios", "marca", "análise de mercado", "campanhas", "redes sociais", "publicidade", "branding", "publicidade", "propaganda", "publicidade e propaganda"] },
+    { interest: "marketing", keywords: ["marketing", "estratégia digital", "social media", "copywriter", "anúncios", "marca", "análise de mercado", "campanhas", "redes sociais", "publicidade", "branding", "publicidade", "propaganda", "publicidade e propaganda"] },
 
-    { interest: "design", keywords: ["ui", "ux", "photoshop", "gráfico", "design think", "design gráfico", "interface", "experiência de usuário", "interface de usuário", "visual", "logo", "layout", "figma", "after effects", "animação", "motion graphics", "arte digital", "arte", "modelagem", "renderização", "visualização 3D", "graphic design", "design gráfico", "web design", "ilustration", "3D design", "interior design", "packaging design", "print design", "adverting design", "visual design"] },
+    { interest: "design", keywords: ["design", "ui", "ux", "photoshop", "gráfico", "design think", "design gráfico", "interface", "experiência de usuário", "interface de usuário", "visual", "logo", "layout", "figma", "after effects", "animação", "motion graphics", "arte digital", "arte", "modelagem", "renderização", "visualização 3D", "graphic design", "design gráfico", "web design", "ilustration", "3D design", "interior design", "packaging design", "print design", "adverting design", "visual design"] },
 
-    { interest: "hardware", keywords: ["manutenção de computadores", "manutenção", "computadores", "montagem", "pc", "pcs", "cabeamento", "configuração de redes", "roteadores", "switches", "redes", "lan", "wan", "protocolos de rede", "eletrônica", "periféricos", "configuração", "dispositivos de entrada/saida", "armazenamento de dados", "hd", "ssd", "sistemas embarcados", "suporte", "suporte técnico", "diagnóstico de hardware", "fontes de alimentação", "impressoras"]},
+    { interest: "hardware", keywords: ["hardware", "manutenção de computadores", "manutenção", "computadores", "montagem", "pc", "pcs", "cabeamento", "configuração de redes", "roteadores", "switches", "redes", "lan", "wan", "protocolos de rede", "eletrônica", "periféricos", "configuração", "dispositivos de entrada/saida", "armazenamento de dados", "hd", "ssd", "sistemas embarcados", "suporte", "suporte técnico", "diagnóstico de hardware", "fontes de alimentação", "impressoras"]},
 
-    { interest: "dados", keywords: ["power bi", "ferramentas google", "análise de dados", "estátisticas", "visualização de dados", "dashboards", "big data", "data", "banco de dados", "sql", "nosql", "modelagem de dados", "banco de dados relacionais", "gerenciamento de dados", "data science", "ciência de dados", "armazenamento de dados", "estruturas de dados", "backup e recuperação", "engenharia de dados", "segurança de dados", "data mining", "processamento de dados", "data analytics", "analytics"]},
+    { interest: "dados", keywords: ["dados", "power bi", "ferramentas google", "análise de dados", "estátisticas", "visualização de dados", "dashboards", "big data", "data", "banco de dados", "sql", "nosql", "modelagem de dados", "banco de dados relacionais", "gerenciamento de dados", "data science", "ciência de dados", "armazenamento de dados", "estruturas de dados", "backup e recuperação", "engenharia de dados", "segurança de dados", "data mining", "processamento de dados", "data analytics", "analytics"]},
     
-    { interest: "inteligência artificial", keywords: ["machine learn", "ia", "ai", "data science", "redes neurais", "reconhecimento de fala", "reconhecimento de movimento", "processamento de linguagem natural", "visão computacional", "automação"]},
+    { interest: "inteligência artificial", keywords: ["inteligência artificial", "machine learn", "ia", "ai", "data science", "redes neurais", "reconhecimento de fala", "reconhecimento de movimento", "processamento de linguagem natural", "visão computacional", "automação"]},
 
-    { interest: "games", keywords: ["design de jogos", "programação de jogos", "engine de jogos", "unity", "unreal engine", "mecânicas de jogo", "prototipagem de jogos", "balanceamento de jogo", "jogo", "jogos", "scripts para jogos", "otimização de desempenho", "desenvolvimento de jogos", "2D", "3D", "animação de personagens", "personagens", "texturização", "efeitos visuais", "animação facial", "modelagem", "animação", "áudio em jogos", "efeitos sonoros", "música para jogos", "criação de ambientes sonoros", "experiência do usuário em jogos", "desenvolvimento multijogador", "multijogador", "jogos online", "testes e qualidade", "teste de jogos", "mercado de jogos"]},
+    { interest: "games", keywords: ["games", "design de jogos", "programação de jogos", "engine de jogos", "unity", "unreal engine", "mecânicas de jogo", "prototipagem de jogos", "balanceamento de jogo", "jogo", "jogos", "scripts para jogos", "otimização de desempenho", "desenvolvimento de jogos", "2D", "3D", "animação de personagens", "personagens", "texturização", "efeitos visuais", "animação facial", "modelagem", "animação", "áudio em jogos", "efeitos sonoros", "música para jogos", "criação de ambientes sonoros", "experiência do usuário em jogos", "desenvolvimento multijogador", "multijogador", "jogos online", "testes e qualidade", "teste de jogos", "mercado de jogos"]},
 
-    { interest: "robótica", keywords: ["controle de robôs", "robôs", "interação humano-robô", "cinemática", "dinâmica", "sensores e atuadores", "reconhecimento de objetos", "redes e sensores", "robôs domésticos", "simulação de robôs"]}
+    { interest: "robótica", keywords: ["robótica", "controle de robôs", "robôs", "interação humano-robô", "cinemática", "dinâmica", "sensores e atuadores", "reconhecimento de objetos", "redes e sensores", "robôs domésticos", "simulação de robôs"]}
   ];
 
   // leitura de arquivo e renderização
@@ -108,8 +109,14 @@ function Ranking() {
 
   // rankeando estudantes
   const rankStudents = (course: string) => {
-    const interest = findInterest(course.toLowerCase());
+    // validação
+    if (!course) {
+      toast.error("Por favor, insira um valor no campo de adequado.");
+      return;
+    }
 
+    const interest = findInterest(course.toLowerCase());
+    // validação
     if (!interest) {
       toast.error("Nenhuma informação encontrada sobre os dados inseridos!");
       setFilteredData(data);
@@ -177,12 +184,13 @@ function Ranking() {
           <Title>Dados da Planilha:</Title>
           <input 
             type="text" 
-            placeholder="Digite o curso (ex: Java)" 
+            placeholder="Digite o curso (ex: Java)"
+            className="inputSelect"
             value={course} 
             onChange={(e) => setCourse(e.target.value)} 
             onKeyDown={handleKeyDown}
           />
-          <button onClick={() => rankStudents(course)}>Rankear Alunos</button>
+          <button className="buttonSelect" onClick={() => rankStudents(course)}>Rankear Alunos</button>
           <ContainerTable>
             <ListPrinc>
               <Thead>

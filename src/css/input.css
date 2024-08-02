@@ -1,0 +1,25 @@
+.inputSelect{
+    margin-right: 20px;
+    margin-bottom: 20px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    background-color: #eaedf0;
+    text-align: center;
+}
+.inputSelect::placeholder{
+    font-size: 12px;
+    text-align: center;
+    color: black;
+}
+
+.buttonSelect{
+    height: 35px;
+    width: 130px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #eaedf0;
+    color: black;
+    font-size: 14px;
+}

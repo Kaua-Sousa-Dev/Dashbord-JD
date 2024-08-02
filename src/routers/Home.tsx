@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import ReactPlayer from "react-player";
 import translate from "/Tradutor-de-Arquivos.mp4"
-import analytics from "/Analytics-JD.mp4"
+import estatisticas from "/Estatisticas.mp4"
 import looker from "/Looker-JD.mp4"
 import ranking from "/Ranking.mp4"
 import Button from "../components/Button";
@@ -83,7 +83,7 @@ export default function stylesHome() {
       <Video>
         <Title>Looker Studio</Title>
         <RoundedReactPlayer url={looker} controls={true} height="400px" width="600px" volume={0} loop={true}/>
-        <p>Plataforma Looker Studio fornecendo os dados em formato de gráficos</p>
+        <p>Dashboard Looker Studio, com 23 gráficos e base de dados em planilha</p>
         <Button>
           <StyledLink to="https://lookerstudio.google.com/u/0/reporting/aa2d52b9-deea-4eea-9200-61f48a929d65/page/DAH2D" target="_blank">Acessar</StyledLink>
         </Button>
@@ -91,10 +91,10 @@ export default function stylesHome() {
 
       <Video> 
         <Title>Estátisticas</Title>
-        <RoundedReactPlayer url={analytics} controls={true} height="400px" width="600px" volume={0} loop={true}/>
-        <p>Site responsável por fornecer gráficos ao inserir arquivos .xml &#40;Planilhas&#41;</p>
+        <RoundedReactPlayer url={estatisticas} controls={true} height="400px" width="600px" volume={0} loop={true}/>
+        <p>Análise de gráficos de forma complementar ao dashboard Looker Studio</p>
         <Button>
-          <StyledLink to="#">Acessar</StyledLink>
+          <StyledLink to="https://dashboardd-jd.netlify.app/">Acessar</StyledLink>
         </Button>
       </Video>
     </Home>
